@@ -22,12 +22,12 @@ import {
     far
 } from '@fortawesome/free-regular-svg-icons';
 library.add(fas, far, fab)
+
 const allIcons = Object.assign(fas, far, fab)
 
 export default allIcons
 
 dom.watch();
-console.log(allIcons)
 
 createApp(App)
     .use(store)

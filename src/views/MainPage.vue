@@ -13,9 +13,8 @@
 <script>
 import FirstComponent from '@/components/FirstComponent.vue'
 import allIcons from '@/main';
-import { icon } from '@fortawesome/fontawesome-svg-core';
+// import { icon } from '@fortawesome/fontawesome-svg-core';
 
-// const faIcons = require('font-awesome-v5-icons')
 export default {
   name: 'MainPage',
   components: {
