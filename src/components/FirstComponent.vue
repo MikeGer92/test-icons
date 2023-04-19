@@ -25,7 +25,7 @@ export default {
     }
   },
   mounted() {
-    console.log(this.iconArr)
+    console.log(this.prefix, this.iconName)
   },
   methods: {
     clickBtn() {
@@ -49,5 +49,9 @@ li {
 }
 a {
   color: #42b983;
+}
+.svg-inline--fa {
+  height: 5em;
+  margin: 24px;
 }
 </style>

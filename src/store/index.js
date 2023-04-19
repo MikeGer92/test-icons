@@ -2,12 +2,15 @@ import {
   createStore
 } from 'vuex'
 
+
+import {
+  libModule
+} from './library';
+
+
 export default createStore({
-  state: {
-    libIcons: 0
-  },
-  getters: {},
-  mutations: {},
-  actions: {},
-  modules: {}
+
+  modules: {
+    lib: libModule
+  }
 })
