@@ -5,6 +5,7 @@
       @updateIcon="onClick"
       :prefix="curPrefix"
       :iconName="curIconName"
+      :counter="iconsCounter"
     />
 
   </div>
@@ -23,6 +24,13 @@ export default {
     return {
     }
   },
+  watch: {
+    iconsCounter: () => {
+      setTimeout(() => {
+        console.log('OK')
+      }, 3000)
+    }
+  }, 
   mounted() {
     this.setIcons()
   },
@@ -37,9 +45,10 @@ export default {
     }),
     onClick() {
       this.addIcon()
-      setTimeout(() => {
-        this.getIcon()
-      }, 3000) 
+      // setTimeout(() => {
+      // this.getIcon()
+      // }, 0)
+      
     }
   },
   computed: {
@@ -47,7 +56,8 @@ export default {
       listIcons: state => state.lib.listIcons,
       curPrefix: state => state.lib.curPrefix,
       curIconName: state => state.lib.curIconName,
-      choosenList: state => state.lib.choosenList
+      choosenList: state => state.lib.choosenList,
+      iconsCounter: state => state.lib.iconsCounter
     }),
     ...mapGetters({
       randomIcon: 'lib/randomIcon',

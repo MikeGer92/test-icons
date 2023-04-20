@@ -1,7 +1,7 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <h3>Ecosystem</h3>
+    <h3>Icons in the queue: {{ counter }}</h3>
     <div class="awesome-icon"><font-awesome-icon 
       :icon="[`${prefix}`, `${iconName}`]" />
     </div>
@@ -17,15 +17,13 @@ export default {
   props: {
       msg: String,
       prefix: String,
-      iconName: String 
+      iconName: String,
+      counter: Number
   }, 
   data() {
     return {
       listIcons: []
     }
-  },
-  mounted() {
-    console.log(this.prefix, this.iconName)
   },
   methods: {
     clickBtn() {

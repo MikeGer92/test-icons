@@ -15,27 +15,18 @@ import {
 library.add(fas, far, fab)
 
 const allIcons = Object.assign(fas, far, fab)
-console.log(allIcons)
 
 dom.watch();
+
 export const libModule = {
   state: () => ({
     listIcons: {},
     curPrefix: 'fab',
     curIconName: 'adn',
-    choosenList: []
+    choosenList: [],
+    iconsCounter: 0
   }),
-  getters: {
-    randomIcon(state, getters) {
-      if (state.choosenList.length > 1) {
-        setTimeout(() => {
-          this.getIcon()
-        }, 3000)
-      } else {
-        this.getIcon()
-      }
-    },
-  },
+  getters: {},
   mutations: {
     setListIcons(state, obj) {
       state.listIcons = obj
@@ -48,6 +39,9 @@ export const libModule = {
     },
     setChoosenList(state, list) {
       state.choosenList = list
+    },
+    setCounter(state, num) {
+      state.iconsCounter = num
     }
   },
   actions: {
@@ -59,7 +53,8 @@ export const libModule = {
     },
     addIcon({
       state,
-      commit
+      commit,
+      dispatch
     }) {
       const iconsKeys = Object.keys(state.listIcons)
       let idx = Math.floor(Math.random() * iconsKeys.length)
@@ -67,25 +62,54 @@ export const libModule = {
       const iconObj = state.listIcons[iconKey]
       state.choosenList.push(Object.values(iconObj))
       commit('setChoosenList', state.choosenList)
+      commit('setCounter', state.choosenList.length)
+      if (state.choosenList.length > 1) {
+        dispatch('getIcon')
+      } else {
+        setTimeout(() => {
+          dispatch('setIcon')
+        }, 0)
+      }
+
+
+    },
+    setIcon({
+      state,
+      commit,
+      dispatch
+    }) {
+      setTimeout(() => {
+        if (state.choosenList.length >= 1) {
+          setTimeout(() => {
+            const next = state.choosenList.shift()
+            commit('setCounter', state.choosenList.length)
+            commit('setCurrPrefix', Object.values(next)[0])
+            commit('setIconName', Object.values(next)[1])
+          }, 3000)
+        } else {
+          commit('setCounter', state.choosenList.length)
+        }
+      }, 0)
     },
     getIcon({
       state,
-      commit
+      commit,
+      dispatch
     }) {
-      if (state.choosenList.length > 1) {
-        // setTimeout(() => {
-        const p = state.choosenList.shift()
-        console.log(p)
-        commit('setCurrPrefix', Object.values(p)[0])
-        commit('setIconName', Object.values(p)[1])
-        // if (state.choosenList.length > 1) {
-        // }
-        // }, 3000)
-      } else {
-        commit('setCurrPrefix', Object.values(state.choosenList[0])[0])
-        commit('setIconName', Object.values(state.choosenList[0])[1])
-      }
-    },
+      setTimeout(() => {
+        if (state.choosenList.length > 1) {
+          dispatch('setIcon')
+        } else {
+          setTimeout(() => {
+            const next = state.choosenList.shift()
+            commit('setCounter', state.choosenList.length)
+            commit('setCurrPrefix', Object.values(next)[0])
+            commit('setIconName', Object.values(next)[1])
+          }, 3000)
+
+        }
+      }, 3000)
+    }
   },
   namespaced: true
 }
