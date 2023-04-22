@@ -24,13 +24,6 @@ export default {
     return {
     }
   },
-  watch: {
-    iconsCounter: () => {
-      setTimeout(() => {
-        console.log('OK')
-      }, 3000)
-    }
-  }, 
   mounted() {
     this.setIcons()
   },
@@ -44,11 +37,7 @@ export default {
       getIcon: 'lib/getIcon'
     }),
     onClick() {
-      this.addIcon()
-      // setTimeout(() => {
-      // this.getIcon()
-      // }, 0)
-      
+      this.addIcon() 
     }
   },
   computed: {

@@ -76,7 +76,6 @@ export const libModule = {
     setIcon({
       state,
       commit,
-      dispatch
     }) {
       setTimeout(() => {
         if (state.choosenList.length >= 1) {
@@ -96,7 +95,7 @@ export const libModule = {
       commit,
       dispatch
     }) {
-      setTimeout(() => {
+       setTimeout(() => {
         if (state.choosenList.length > 1) {
           dispatch('setIcon')
         } else {
