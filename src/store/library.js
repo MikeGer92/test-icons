@@ -63,52 +63,27 @@ export const libModule = {
       state.choosenList.push(Object.values(iconObj))
       commit('setChoosenList', state.choosenList)
       commit('setCounter', state.choosenList.length)
-      if (state.choosenList.length > 1) {
-        dispatch('getIcon')
-      } else {
-        setTimeout(() => {
-          dispatch('setIcon')
-        }, 0)
-      }
-
-
+      dispatch('getIcon')
     },
     setIcon({
       state,
       commit,
-      dispatch
     }) {
       setTimeout(() => {
-        if (state.choosenList.length >= 1) {
-          setTimeout(() => {
-            const next = state.choosenList.shift()
-            commit('setCounter', state.choosenList.length)
-            commit('setCurrPrefix', Object.values(next)[0])
-            commit('setIconName', Object.values(next)[1])
-          }, 3000)
-        } else {
-          commit('setCounter', state.choosenList.length)
-        }
-      }, 0)
+        const next = state.choosenList.shift()
+        commit('setCounter', state.choosenList.length)
+        commit('setCurrPrefix', Object.values(next)[0])
+        commit('setIconName', Object.values(next)[1])
+      }, 3000)
     },
     getIcon({
       state,
       commit,
       dispatch
     }) {
-      setTimeout(() => {
-        if (state.choosenList.length > 1) {
-          dispatch('setIcon')
-        } else {
-          setTimeout(() => {
-            const next = state.choosenList.shift()
-            commit('setCounter', state.choosenList.length)
-            commit('setCurrPrefix', Object.values(next)[0])
-            commit('setIconName', Object.values(next)[1])
-          }, 3000)
-
-        }
-      }, 3000)
+      if (state.choosenList.length >= 1) {
+        dispatch('setIcon')
+      }
     }
   },
   namespaced: true

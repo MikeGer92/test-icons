@@ -32,6 +32,8 @@
     "not ie 11"
   ],
   "resolve": {
-    "fallback": {"stream": false}
+    "fallback": {
+      "stream": false
+    }
   }
 }
